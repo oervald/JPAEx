@@ -20,7 +20,7 @@
       function initSaveBtn(){
         $("#btn_save").click(function(){
           //First create post argument as a JavaScript object
-          var newPerson = {"id" : "-1","fName" : $("#fname").val(), "lName" : $("#lname").val(), "phone" : $("#phone").val()};
+          var newPerson = {"fName" : $("#fname").val(), "lName" : $("#lname").val(), "phone" : $("#phone").val()};
           $.ajax({
             url: "../person",
             data: JSON.stringify(newPerson), //Convert newPerson to JSON

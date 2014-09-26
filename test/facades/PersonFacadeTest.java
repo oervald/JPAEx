@@ -8,9 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import model.Person;
+import org.junit.After;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class PersonFacadeTest {
 
@@ -25,11 +26,18 @@ public class PersonFacadeTest {
     public void x() {
         //true will create a new facade instance for each test case
         facade = PersonFacadeDB.getFacade(true);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("RestCRUDPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("cphdj74");
         EntityManager em = emf.createEntityManager();
         em.createQuery("DELETE FROM Person");
     }
 
+//    @After
+//    public void y (){
+//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("cphdj74");
+//        EntityManager em = emf.createEntityManager();
+//        em.createQuery("DELETE FROM Person");
+//    
+//    }
     @Test
     public void testAddPerson() throws NotFoundException {
         Person person = facade.addPerson(gson.toJson(new Person("bbb", "bbb", "bbb")));
@@ -78,10 +86,8 @@ public class PersonFacadeTest {
         String original = gson.toJson(person);
         String changed = original.replace("aaa", "abc");
         String oldValue = gson.toJson(facade.editPerson(changed));
-        System.out.println(oldValue);
         assertEquals(original, oldValue);
         String newValue = facade.getPerson(person.getId());
-        System.out.println(newValue);
         assertEquals(changed, newValue);
 
     }

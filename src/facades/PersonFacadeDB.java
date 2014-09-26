@@ -31,7 +31,7 @@ public class PersonFacadeDB implements IPersonFacade {
         return instance;
 
     }
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("RestCRUDPU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("cphdj74");
     EntityManager em = emf.createEntityManager();
     private final Gson gson = new Gson();
 
@@ -63,7 +63,7 @@ public class PersonFacadeDB implements IPersonFacade {
     @Override
     public String getPerson(int id) throws NotFoundException {
         Person p = em.find(Person.class, id);
-         if (p == null) {
+        if (p == null) {
             throw new NotFoundException("No person exists for the given id");
         }
         return gson.toJson(p);
@@ -72,13 +72,8 @@ public class PersonFacadeDB implements IPersonFacade {
     @Override
     public String getPersons() {
         Query p = em.createQuery("SELECT p FROM Person p");
-
         List pe = p.getResultList();
-
-        System.out.println(pe);
-
         Collections.reverse(pe);
-
         return gson.toJson(pe);
     }
 
@@ -92,6 +87,14 @@ public class PersonFacadeDB implements IPersonFacade {
 
         em.persist(p);
         return oldValue;
+    }
+
+    public void createTestData() {
+        addPerson(gson.toJson(new Person("Lars", "Mortensen", "1234")));
+        addPerson(gson.toJson(new Person("John", "Handsen", "2345")));
+        addPerson(gson.toJson(new Person("Peter", "Olsen", "3456")));
+        addPerson(gson.toJson(new Person("John", "McDonald", "4567")));
+        addPerson(gson.toJson(new Person("George", "Peterson", "5678")));
     }
 
 }

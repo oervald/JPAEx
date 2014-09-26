@@ -17,7 +17,7 @@ public class OOCreate {
 
   
     public void test() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("RestCRUDPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("cphdj74");
         EntityManager em = emf.createEntityManager();
         Person p = new Person();
         
