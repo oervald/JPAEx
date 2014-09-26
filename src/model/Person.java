@@ -21,11 +21,12 @@ public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "s1")// , generator = "s1"
+            @SequenceGenerator(name="s1", sequenceName = "PERSON_SEQ", initialValue = 1000, allocationSize = 1)
     int id;
-    public String fName;
-    public String lName;
-    public String phone;
+    String fName;
+    String lName;
+    String phone;
 
     public Person() {
     }
@@ -72,7 +73,9 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Person[ id=" + id + " ]";
+        return "Person{" + "id=" + id + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + '}';
     }
 
-}
+ }
+
+
